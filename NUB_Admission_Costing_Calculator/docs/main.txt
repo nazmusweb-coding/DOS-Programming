@@ -1,0 +1,32 @@
+------------------------------------------------------------main.c------------------------------------------------------------
+
+You should know:
+- D_ prefix is used for Diploma Holder functions.
+
+void on_submit_button_clicked(GtkWidget *widget, gpointer data)
+- Handles the 'submit' button click event in a GTK application.
+- Retrieves text from SSC and HSC entry widgets and the selected department from a combo box.
+- Checks if any of the required fields are empty and displays a message if so.
+- Converts the retrieved text to float values for SSC and HSC results.
+- Initializes an Undergraduate struct with pointers to department-specific functions.
+- Calls the appropriate function based on the selected department, 
+  passing SSC and HSC results along with a callback function to display results.
+- Frees memory allocated by GTK for the selected department string.
+
+NOTE: This function is crucial for processing user input and ensuring that all required 
+      fields are filled before proceeding with department-specific calculations or actions.
+
+void D_on_submit_button_clicked(GtkWidget *widget, gpointer data)
+- Serves as a callback for the 'submit' button in the diploma interface of a GTK application.
+- Retrieves text from the diploma entry widget and the selected department from a combo box.
+- Checks if any of the required fields are empty and displays a message if so.
+- Converts the retrieved text to a float value for the diploma result.
+- Initializes an `UndergraduateDiploma` struct with pointers to department-specific functions for diploma holders.
+- Calls the appropriate function based on the selected department, 
+   passing the diploma result along with a callback function to display results.
+- Frees memory allocated by GTK for the selected department string.
+
+NOTE: This function is essential for processing diploma holder input and ensuring that all required 
+      fields are filled before proceeding with department-specific calculations or actions.
+
+------------------------------------------------------------------------------------------------------------------------------
