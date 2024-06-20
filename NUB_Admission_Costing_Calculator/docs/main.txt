@@ -1,4 +1,4 @@
-------------------------------------------------------------main.c------------------------------------------------------------
+---------------------------------------------------------------main.c---------------------------------------------------------------
 
 You should know:
 - D_ prefix is used for Diploma Holder functions.
@@ -53,4 +53,26 @@ void show_diploma(GtkWidget *widget, gpointer data)
 NOTE: Both functions are essential for switching between different user interfaces within the application, 
       ensuring a smooth transition and clear display of the relevant interface based on user selection.
 
-------------------------------------------------------------------------------------------------------------------------------
+void create_undergraduate_interface(GtkWidget *container)
+- This function constructs the undergraduate interface within a given container widget.
+- It creates a new grid widget to organize interface elements.
+- Adds labels and entry widgets for SSC and HSC results, allowing users to input their scores.
+- Sets up a combo box for department selection with various options like BBA, LLB, EEE, etc.
+- Includes a 'Submit' button that triggers the `on_submit_button_clicked` callback when clicked.
+- Initializes a text view and its associated buffer for displaying results, making it non-editable and hiding the cursor.
+
+NOTE: The `create_undergraduate_interface` function is crucial for setting up the user interface where undergraduate applicants 
+      can enter their results and select their desired department for further processing or evaluation in the application.
+
+void create_diploma_interface(GtkWidget *container)
+- This function is designed to construct the diploma interface within a specified container widget.
+- It creates a grid layout to organize interface elements systematically.
+- Adds a label and an entry widget for the diploma result, allowing diploma holders to input their score.
+- Sets up a combo box for department selection with options like EEE, Textile, CSE, etc.
+- Includes a 'Submit' button that connects to the `D_on_submit_button_clicked` callback for processing the input when clicked.
+- Initializes a text view and its associated buffer for result display, configured to be non-editable and with an invisible cursor.
+
+NOTE: The `create_diploma_interface` function plays a key role in providing a user interface for diploma holders to 
+      enter their results and choose their department for subsequent actions or calculations in the application.
+
+------------------------------------------------------------------------------------------------------------------------------------
