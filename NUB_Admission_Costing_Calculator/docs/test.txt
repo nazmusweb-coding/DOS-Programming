@@ -3,6 +3,21 @@
 You should know:
 - D_ prefix is used for Diploma Holder functions.
 
+void getwaiver(float SSC, float HSC)
+- Determines the waiver percentage based on the lower of two results between SSC and HSC.
+- Result higher than than 5.0 is kept for GOLDEN GPA 5.
+
+NOTE: The function calculates waivers based on academic performance, 
+      incentivizing higher scores with greater financial discounts.
+
+bool D_getwaiver(float DiplomaResult)
+- Determines eligibility for a waiver based on the Diploma result for undergraduate for diploma holders.
+- Returns true if the Diploma result is 3.0 or higher, indicating eligibility for a waiver.
+- Returns false if the Diploma result is below 3.0, indicating ineligibility for a waiver.
+
+NOTE: This function simplifies the waiver determination process for diploma holders 
+      by using a single threshold value, streamlining administrative procedures.
+
 void replace_placeholder(char *buffer, const char *placeholder, const char *value)
 - At first, finds placeholder position 
 - Then adds null character at starting position of placeholder.
