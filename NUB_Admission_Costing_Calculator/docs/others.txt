@@ -1,0 +1,28 @@
+-------------------------------------------------------------------Makefile-------------------------------------------------------------------
+
+${PROG}: ${PROG}.c
+	${CC} ${PROG}.c ${OPTION1}.c -o ${PROG} ${CFLAGSANDLIBS}
+- This rule compiles the main program. It uses `gcc` to compile `main.c` and `test.c` into an executable named `main`.
+- It includes flags and libraries for GTK+ 3.0, retrieved using `pkg-config`, and links the math library with `-lm`.
+- Executing `make` will dynamically link everything and compile the programs to generate a executable file named `main`
+
+clean:
+    rm ${PROG}
+- This rule is a phony target that doesn't represent a file. It's used to clean up the directory by removing the compiled executable `main`.
+- Executing `make clean` will delete the `main` file, allowing for a fresh build next time `make` is run.
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------Formats-------------------------------------------------------------------
+
+In this folder, csv(comma-separated values) file format has been followed.
+
+format.txt
+- A output format for Undergraduate.
+- This plain text is a format with placeholders for generating output by easily replacing placeholders with corresponding values.
+
+D_fromat.txt
+- A output format for Undergraduate(for Diploma Holders)
+- Similar purpose as format.txt file.
+
+----------------------------------------------------------------------------------------------------------------------------------------------
