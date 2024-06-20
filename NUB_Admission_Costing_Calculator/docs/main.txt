@@ -1,4 +1,4 @@
----------------------------------------------------------------main.c---------------------------------------------------------------
+-----------------------------------------------------------------main.c-----------------------------------------------------------------
 
 You should know:
 - D_ prefix is used for Diploma Holder functions.
@@ -75,4 +75,24 @@ void create_diploma_interface(GtkWidget *container)
 NOTE: The `create_diploma_interface` function plays a key role in providing a user interface for diploma holders to 
       enter their results and choose their department for subsequent actions or calculations in the application.
 
-------------------------------------------------------------------------------------------------------------------------------------
+GtkWidget *content_area;
+- This global widget serves as the main container for the content in the application. 
+  It is where different interfaces are loaded and displayed.
+
+GtkWidget *ssc_entry, *hsc_entry;
+- These global entry widgets are used for inputting SSC (Secondary School Certificate) and HSC (Higher Secondary Certificate) results
+  in the undergraduate interface.
+
+GtkWidget *department_combo;
+- This global combo box widget allows users to select a department from a list of options in both undergraduate and diploma interfaces.
+
+GtkWidget *result_view;
+- This global text view widget is used to display results or messages back to the user. It is set to be non-editable.
+
+GtkTextBuffer *result_buffer;
+- Associated with `result_view`, this global buffer stores the text displayed in the text view widget.
+
+GtkWidget *diploma_entry;
+- Similar to `ssc_entry` and `hsc_entry`, this global entry widget is used for inputting diploma results in the diploma interface.
+
+----------------------------------------------------------------------------------------------------------------------------------------
