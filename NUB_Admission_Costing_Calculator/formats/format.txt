@@ -14,5 +14,3 @@ Total Credit: "credit"
 
 Your waiver will be maintained if you can score at least 3.00 cgpa in every semester.
 If you score less then 3.00 in a semester then you have to pay full for the next semester. 
-
-Debug print: "waiver" "TC" "year" "semester" "credit" 
