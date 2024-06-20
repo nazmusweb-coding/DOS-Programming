@@ -95,4 +95,21 @@ GtkTextBuffer *result_buffer;
 GtkWidget *diploma_entry;
 - Similar to `ssc_entry` and `hsc_entry`, this global entry widget is used for inputting diploma results in the diploma interface.
 
+int main(int argc, char **argv)
+- This function is the entry point of the GTK application.
+- Initializes GTK with `gtk_init`.
+- Creates the main window with a title "NUB Admission Costing Calculator" and sets 
+  its properties like border width, default size, position, and resizability.
+- Sets up a grid layout as the main container for the window's content.
+- Constructs a menu bar with menu items "Undergraduate" and "Undergraduate (for Diploma Holders)" 
+  which are connected to their respective callback functions to display different interfaces.
+- Initializes the `content_area` as a vertical box to hold different interfaces and attaches it to the grid.
+- Calls `create_undergraduate_interface` to load the undergraduate interface by default.
+- Shows all widgets with `gtk_widget_show_all`.
+- Connects the window's destroy event to end the GTK main loop, allowing for clean exit of the application.
+- Enters GTK main loop with `gtk_main`.
+
+NOTE: The `main` function sets up the initial state of the application, including window properties, menu options, 
+      and default interface. It also handles event connections for user interactions and application lifecycle.
+
 ----------------------------------------------------------------------------------------------------------------------------------------
