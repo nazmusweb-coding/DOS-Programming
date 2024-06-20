@@ -29,4 +29,13 @@ void D_on_submit_button_clicked(GtkWidget *widget, gpointer data)
 NOTE: This function is essential for processing diploma holder input and ensuring that all required 
       fields are filled before proceeding with department-specific calculations or actions.
 
+void display_result(const char *message)
+- This function is responsible for displaying results in a GTK text buffer.
+- It retrieves the end iterator of the text buffer to ensure that new text is appended at the end.
+- Inserts the provided message into the text buffer at the end position.
+- Implementing this function was the reason to declare ResultCallback function pointer earlier in the header  file.
+
+NOTE: The `display_result` function is a utility function used throughout the GTK application to output 
+      messages to both the user interface and the console, aiding in both user interaction and debugging.
+
 ------------------------------------------------------------------------------------------------------------------------------
