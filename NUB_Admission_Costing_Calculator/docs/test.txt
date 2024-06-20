@@ -1,4 +1,4 @@
--------------------------------------------------------test.h-------------------------------------------------------
+------------------------------------------------------------test.h------------------------------------------------------------
 
 You should know:
 - D_ prefix is used for Diploma Holder functions.
@@ -63,4 +63,17 @@ NOTE: This function is similar to `Display` but uses a different format file ("f
       It ensures safe data processing and storage before passing it to the callback, avoiding data 
       corruption or loss during processing.
 
---------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------test.c------------------------------------------------------------
+
+int waiver, TC, year, semester, credit
+- These global variables are used throughout the program to store and manipulate data related to academic programs.
+
+#define BUFFER_SIZE 1024
+- Defines a global macro for the buffer size used when reading from files. It sets the size of the buffer to 1024 bytes.
+
+char TEMP_FILE_NAME[] = "formats/temp.txt";
+- Declares a global array of characters that stores the name of the temporary file used during output generation.
+
+------------------------------------------------------------------------------------------------------------------------------
