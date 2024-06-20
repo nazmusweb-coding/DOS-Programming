@@ -34,20 +34,28 @@ The project utilizes the following frameworks and GUI tools:
 ## Screenshot (Output)
 
 ### Default Interface of the Application
-![Default Interface](photos/default_interface.png)
 *This is the default interface of the application, accessible from Menu -> Undergraduate.*
 
+![Default Interface](photos/default_interface.png)
+
+
 ### Menu Options
-![Menu Options](photos/menu_options.png)
 *This screenshot shows the options under the Menu bar.*
 
+![Menu Options](photos/menu_options.png)
+
+
 ### Undergraduate Option Interface
-![Undergraduate Option](photos/Undergraduate_option.png)
 *This screenshot shows the interface for the Undergraduate option.*
 
+![Undergraduate Option](photos/Undergraduate_option.png)
+
+
 ### Interface for Diploma Holders
-![Undergraduate (for Diploma Holders) Option](photos/Undergraduate(for_DH)_option.png)
 *This screenshot shows the interface for the diploma holders option.*
+
+![Undergraduate (for Diploma Holders) Option](photos/Undergraduate(for_DH)_option.png)
+
 
 ## User Manual
 ### Installation
