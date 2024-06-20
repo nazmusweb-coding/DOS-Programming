@@ -1,8 +1,0 @@
-
-void replace_placeholder(char *buffer, const char *placeholder, const char *value)
-- At first, finds placeholder position 
-- Then adds null character at starting position of placeholder.
-- Concatenates temp, buffer, value together originally inside of temp.
-- Lastly and safely, temp is copied in actual buffer.
-
-NOTE: here temp is used for avoiding overlapping issues, safe replacement, buffer overflow protection.

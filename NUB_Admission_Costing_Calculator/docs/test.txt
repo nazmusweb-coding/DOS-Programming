@@ -1,0 +1,43 @@
+-------------------------------------------------------test.h-------------------------------------------------------
+
+You should know:
+- D_ prefix is used for Diploma Holder functions.
+
+void replace_placeholder(char *buffer, const char *placeholder, const char *value)
+- At first, finds placeholder position 
+- Then adds null character at starting position of placeholder.
+- Concatenates temp, buffer, value together originally inside of temp.
+- Lastly and safely, temp is copied in actual buffer.
+
+NOTE: here temp is used for avoiding overlapping issues, safe replacement, buffer overflow protection.
+
+void Display(ResultCallback callback)
+- Opens "formats/format.txt" in read mode.
+- Opens a temporary file defined by TEMP_FILE_NAME for read and write operations.
+- Reads lines from the format file into a buffer.
+- For each placeholder found, replaces it with its corresponding value using the replace_placeholder function.
+- Writes the updated buffer to the temporary file.
+- Rewinds the temporary file to read from the beginning.
+- Reads lines from the temporary file and calls the provided callback function with each line of output.
+- Closes both input and temporary files.
+- Removes the temporary file using TEMP_FILE_NAME.
+
+NOTE: The use of a temporary file ensures that data is processed and stored safely before being passed
+      to the callback, preventing potential data corruption or loss during processing.
+
+void D_Display(ResultCallback callback)
+- Opens "formats/D_format.txt" as read mode.
+- Opens a temporary file defined by TEMP_FILE_NAME for read and write operations.
+- Reads lines from the D_format file into a buffer.
+- For each placeholder found, replaces it with its corresponding value using the replace_placeholder function.
+- Writes the updated buffer to the temporary file.
+- Rewinds the temporary file to read from the beginning.
+- Reads lines from the temporary file and calls the provided callback function with each line of output.
+- Closes both input and temporary files.
+- Removes the temporary file using TEMP_FILE_NAME.
+
+NOTE: This function is similar to `Display` but uses a different format file ("formats/D_format.txt").
+      It ensures safe data processing and storage before passing it to the callback, avoiding data 
+      corruption or loss during processing.
+
+--------------------------------------------------------------------------------------------------------------------
