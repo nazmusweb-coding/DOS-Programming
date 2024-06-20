@@ -38,4 +38,19 @@ void display_result(const char *message)
 NOTE: The `display_result` function is a utility function used throughout the GTK application to output 
       messages to both the user interface and the console, aiding in both user interaction and debugging.
 
+void show_undergraduate(GtkWidget *widget, gpointer data)
+- This callback function is triggered to show the undergraduate interface.
+- It first clears any previous content in the container using `gtk_container_foreach` and `gtk_widget_destroy`.
+- Then, it calls `create_undergraduate_interface` to build the undergraduate interface inside the content area.
+- Finally, it refreshes the container to display the new interface with `gtk_widget_show_all`.
+
+void show_diploma(GtkWidget *widget, gpointer data)
+- Similar to `show_undergraduate`, this callback function is used to show the diploma interface.
+- It clears any existing content in the container.
+- Calls `create_diploma_interface` to construct the diploma interface within the content area.
+- Refreshes the container to update the display with the new interface.
+
+NOTE: Both functions are essential for switching between different user interfaces within the application, 
+      ensuring a smooth transition and clear display of the relevant interface based on user selection.
+
 ------------------------------------------------------------------------------------------------------------------------------
