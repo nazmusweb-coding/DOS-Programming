@@ -3,6 +3,14 @@
 You should know:
 - D_ prefix is used for Diploma Holder functions.
 
+typedef void (*ResultCallback)(const char *)
+- Defines a function pointer type named ResultCallback.
+- ResultCallback is a pointer to a function that takes a single argument of type `const char *` and returns nothing (void).
+- It is used to pass functions as arguments to other functions, allowing for custom behavior when those functions are called.
+
+NOTE: This type definition allows for greater flexibility and modularity in the code by enabling functions 
+      to accept different callback implementations that conform to the specified signature.
+
 void getwaiver(float SSC, float HSC)
 - Determines the waiver percentage based on the lower of two results between SSC and HSC.
 - Result higher than than 5.0 is kept for GOLDEN GPA 5.
