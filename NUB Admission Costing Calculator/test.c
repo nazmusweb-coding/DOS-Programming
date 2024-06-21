@@ -341,9 +341,6 @@ void D_Display(ResultCallback callback)
 
 void D_EEE(float DiplomaResult, ResultCallback callback)
 {
-    // const int creditFee = 1574;
-    // const int semesterFee = 5000;
-    // const int onetimeFee = 18000;
     year = 3;
     if (D_getwaiver(DiplomaResult))
     {
@@ -363,9 +360,6 @@ void D_EEE(float DiplomaResult, ResultCallback callback)
 
 void D_Textile(float DiplomaResult, ResultCallback callback)
 {
-    // const int creditFee = 1534;
-    // const int semesterFee = 5000;
-    // const int onetimeFee = 18000;
     year = 3;
     if (D_getwaiver(DiplomaResult))
     {
@@ -385,9 +379,6 @@ void D_Textile(float DiplomaResult, ResultCallback callback)
 
 void D_CSE(float DiplomaResult, ResultCallback callback)
 {
-    // const int creditFee = 1473;
-    // const int semesterFee = 5000;
-    // const int onetimeFee = 18000;
     year = 3;
     if (D_getwaiver(DiplomaResult))
     {
@@ -407,9 +398,7 @@ void D_CSE(float DiplomaResult, ResultCallback callback)
 
 void D_ECE(float DiplomaResult, ResultCallback callback)
 {
-    // const int creditFee = 1020;
-    // const int semesterFee = 5000;
-    // const int onetimeFee = 18000;
+
     year = 3;
     if (D_getwaiver(DiplomaResult))
     {
