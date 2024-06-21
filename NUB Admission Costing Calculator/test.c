@@ -1,7 +1,6 @@
 #include "test.h"
 
-// Global variables to read and write data
-// "waiver" "TC" "year" "semester" "credit" 
+// Global variables to read and write data, for "waiver" "TC" "year" "semester" "credit" placeholders
 int waiver, TC, year, semester, credit;
 
 // Readfile buffer size and temporary text file name for output generation
@@ -122,7 +121,56 @@ void Display(ResultCallback callback)
     remove(TEMP_FILE_NAME);
 }
 
+// Display function for Diploma Holders
+void D_Display(ResultCallback callback) 
+{
+    FILE *fp = fopen("formats/D_format.txt", "r");
+    if (fp == NULL) 
+    {
+        perror("Failed to open input file");
+        exit(EXIT_FAILURE);
+    }
 
+    FILE *temp_fp = fopen(TEMP_FILE_NAME, "w+");
+    if (temp_fp == NULL) 
+    {
+        perror("Failed to open temporary file");
+        fclose(fp);
+        exit(EXIT_FAILURE);
+    }
+
+    char buffer[BUFFER_SIZE];
+    char value[20];
+
+    while (fgets(buffer, BUFFER_SIZE, fp) != NULL) 
+    {
+        sprintf(value, "%d", TC);
+        replace_placeholder(buffer, "\"TC\"", value);
+
+        sprintf(value, "%d", year);
+        replace_placeholder(buffer, "\"year\"", value);
+
+        sprintf(value, "%d", semester);
+        replace_placeholder(buffer, "\"semester\"", value);
+
+        sprintf(value, "%d", credit);
+        replace_placeholder(buffer, "\"credit\"", value);
+
+        fputs(buffer, temp_fp);
+    }
+
+    rewind(temp_fp);
+
+    while (fgets(buffer, BUFFER_SIZE, temp_fp) != NULL) 
+    {
+        printf("Buffer content: %s\n", buffer); // Debug print
+        callback(buffer); // Call the callback with each line of output
+    }
+
+    fclose(fp);
+    fclose(temp_fp);
+    remove(TEMP_FILE_NAME);
+}
 
 // Definition of Struct Undergraduate starts from here
 void BBA(float SSC, float HSC, ResultCallback callback)
@@ -288,57 +336,7 @@ void Bangla(float SSC, float HSC, ResultCallback callback)
     waiver = TC = year = semester = credit = 0;
 }// End of definition of struct Undergraduate
 
-// Display function for Diploma Holders
-void D_Display(ResultCallback callback) 
-{
-    FILE *fp = fopen("formats/D_format.txt", "r");
-    if (fp == NULL) 
-    {
-        perror("Failed to open input file");
-        exit(EXIT_FAILURE);
-    }
-
-    FILE *temp_fp = fopen(TEMP_FILE_NAME, "w+");
-    if (temp_fp == NULL) 
-    {
-        perror("Failed to open temporary file");
-        fclose(fp);
-        exit(EXIT_FAILURE);
-    }
-
-    char buffer[BUFFER_SIZE];
-    char value[20];
-
-    while (fgets(buffer, BUFFER_SIZE, fp) != NULL) 
-    {
-        sprintf(value, "%d", TC);
-        replace_placeholder(buffer, "\"TC\"", value);
-
-        sprintf(value, "%d", year);
-        replace_placeholder(buffer, "\"year\"", value);
-
-        sprintf(value, "%d", semester);
-        replace_placeholder(buffer, "\"semester\"", value);
-
-        sprintf(value, "%d", credit);
-        replace_placeholder(buffer, "\"credit\"", value);
-
-        fputs(buffer, temp_fp);
-    }
-
-    rewind(temp_fp);
-
-    while (fgets(buffer, BUFFER_SIZE, temp_fp) != NULL) 
-    {
-        printf("Buffer content: %s\n", buffer); // Debug print
-        callback(buffer); // Call the callback with each line of output
-    }
-
-    fclose(fp);
-    fclose(temp_fp);
-    remove(TEMP_FILE_NAME);
-}
-
+// Definition of Struct UndergraduateDiploma starts from here
 void D_EEE(float DiplomaResult, ResultCallback callback)
 {
     year = 3;
@@ -398,7 +396,6 @@ void D_CSE(float DiplomaResult, ResultCallback callback)
 
 void D_ECE(float DiplomaResult, ResultCallback callback)
 {
-
     year = 3;
     if (D_getwaiver(DiplomaResult))
     {
@@ -453,4 +450,4 @@ void D_ME(float DiplomaResult, ResultCallback callback)
     }
     D_Display(callback);
     TC = year = semester = credit = 0;
-}
+}// End of definition of struct UndergraduateDiploma
