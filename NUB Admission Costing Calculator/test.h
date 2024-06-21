@@ -9,6 +9,7 @@
 #include <gtk/gtk.h>
 #include <stdbool.h>
 
+// Utility fuctions
 // The function prototype for the display callback
 typedef void (*ResultCallback)(const char *);
 void getwaiver(float SSC, float HSC);
@@ -16,18 +17,6 @@ bool D_getwaiver(float DiplomaResult);
 void replace_placeholder(char *buffer, const char *placeholder, const char *value);
 void Display(ResultCallback callback);
 void D_Display(ResultCallback callback);
-
-void BBA(float SSC, float HSC, ResultCallback callback);
-void LLB(ResultCallback callback);
-void EEE(float SSC, float HSC, ResultCallback callback);
-void Textile(float SSC, float HSC, ResultCallback callback);
-void CSE(float SSC, float HSC, ResultCallback callback);
-void Civil(float SSC, float HSC, ResultCallback callback);
-void ME(float SSC, float HSC, ResultCallback callback);
-void ECE(float SSC, float HSC, ResultCallback callback);
-void B_Pharm(ResultCallback callback);
-void ELL(float SSC, float HSC, ResultCallback callback);
-void Bangla(float SSC, float HSC, ResultCallback callback);
 
 struct Undergraduate 
 {
@@ -44,13 +33,6 @@ struct Undergraduate
     void (*Bangla)(float SSC, float HSC, ResultCallback callback);
 };
 
-void D_EEE(float DiplomaResult, ResultCallback callback);
-void D_Textile(float DiplomaResult, ResultCallback callback);
-void D_CSE(float DiplomaResult, ResultCallback callback);
-void D_ECE(float DiplomaResult, ResultCallback callback);
-void D_Civil(float DiplomaResult, ResultCallback callback);
-void D_ME(float DiplomaResult, ResultCallback callback);
-
 struct UndergraduateDiploma 
 {
     void (*EEE)(float DiplomaResult, ResultCallback callback);
@@ -60,5 +42,9 @@ struct UndergraduateDiploma
     void (*Civil)(float DiplomaResult, ResultCallback callback);
     void (*ME)(float DiplomaResult, ResultCallback callback);
 };
+
+// Declare the global struct for Undergraduate and UndergraduateDiploma
+extern struct Undergraduate UG;
+extern struct UndergraduateDiploma UGD;
 
 #endif

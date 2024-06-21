@@ -9,10 +9,8 @@ void display_result(const char *message);
 void show_undergraduate(GtkWidget *widget, gpointer data);
 void show_diploma(GtkWidget *widget, gpointer data);
 
-// Function to create and show undergraduate interface
+// Function to create and show undergraduate and diploma interface
 void create_undergraduate_interface(GtkWidget *container);
-
-// Function to create and show diploma interface
 void create_diploma_interface(GtkWidget *container);
 
 // Global variables
@@ -173,63 +171,48 @@ void on_submit_button_clicked(GtkWidget *widget, gpointer data)
     // Clear the text view
     gtk_text_buffer_set_text(result_buffer, "", -1);
 
-    // Calling the appropriate function based on the selected department
-    struct Undergraduate ug = {
-        .BBA = BBA,
-        .LLB = LLB,
-        .EEE = EEE,
-        .Textile = Textile,
-        .CSE = CSE,
-        .Civil = Civil,
-        .ME = ME,
-        .ECE = ECE,
-        .B_Pharm = B_Pharm,
-        .ELL = ELL,
-        .Bangla = Bangla
-    };
-
     if (strcmp(selected_department, "BBA") == 0) 
     {
-        ug.BBA(ssc, hsc, display_result);
+        UG.BBA(ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "LLB") == 0) 
     {
-        ug.LLB(display_result);
+        UG.LLB(display_result);
     } 
     else if (strcmp(selected_department, "EEE") == 0) 
     {
-        ug.EEE(ssc, hsc, display_result);
+        UG.EEE(ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "Textile") == 0) 
     {
-        ug.Textile(ssc, hsc, display_result);
+        UG.Textile(ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "CSE") == 0) 
     {
-        ug.CSE(ssc, hsc, display_result);
+        UG.CSE(ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "Civil") == 0) 
     {
-        ug.Civil(ssc, hsc, display_result);
+        UG.Civil(ssc, hsc, display_result);
     } else if (strcmp(selected_department, "ME") == 0) 
     {
-        ug.ME(ssc, hsc, display_result);
+        UG.ME(ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "ECE") == 0) 
     {
-        ug.ECE(ssc, hsc, display_result);
+        UG.ECE(ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "B_Pharm") == 0) 
     {
-        ug.B_Pharm(display_result);
+        UG.B_Pharm(display_result);
     } 
     else if (strcmp(selected_department, "ELL") == 0) 
     {
-        ug.ELL(ssc, hsc, display_result);
+        UG.ELL(ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "Bangla") == 0) 
     {
-        ug.Bangla(ssc, hsc, display_result);
+        UG.Bangla(ssc, hsc, display_result);
     }
 
     g_free((gpointer)selected_department);
@@ -295,39 +278,29 @@ void D_on_submit_button_clicked(GtkWidget *widget, gpointer data)
     // Clear the text view
     gtk_text_buffer_set_text(result_buffer, "", -1);
 
-    // Calling the appropriate function based on the selected department
-    struct UndergraduateDiploma ugd= {
-        .EEE = D_EEE,
-        .Textile = D_Textile,
-        .CSE = D_CSE,
-        .Civil = D_Civil,
-        .ME = D_ME,
-        .ECE = D_ECE,
-    };
-
     if (strcmp(selected_department, "EEE") == 0) 
     {
-        ugd.EEE(diploma, display_result);
+        UGD.EEE(diploma, display_result);
     } 
     else if (strcmp(selected_department, "Textile") == 0) 
     {
-        ugd.Textile(diploma, display_result);
+        UGD.Textile(diploma, display_result);
     } 
     else if (strcmp(selected_department, "CSE") == 0) 
     {
-        ugd.CSE(diploma, display_result);
+        UGD.CSE(diploma, display_result);
     } 
     else if (strcmp(selected_department, "ECE") == 0) 
     {
-        ugd.ECE(diploma, display_result);
+        UGD.ECE(diploma, display_result);
     } 
     else if (strcmp(selected_department, "Civil") == 0) 
     {
-        ugd.Civil(diploma, display_result);
+        UGD.Civil(diploma, display_result);
     } 
     else if (strcmp(selected_department, "ME") == 0) 
     {
-        ugd.ME(diploma, display_result);
+        UGD.ME(diploma, display_result);
     }
 
     g_free((gpointer)selected_department);

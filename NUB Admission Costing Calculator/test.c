@@ -336,6 +336,7 @@ void Bangla(float SSC, float HSC, ResultCallback callback)
     waiver = TC = year = semester = credit = 0;
 }// End of definition of struct Undergraduate
 
+
 // Definition of Struct UndergraduateDiploma starts from here
 void D_EEE(float DiplomaResult, ResultCallback callback)
 {
@@ -451,3 +452,27 @@ void D_ME(float DiplomaResult, ResultCallback callback)
     D_Display(callback);
     TC = year = semester = credit = 0;
 }// End of definition of struct UndergraduateDiploma
+
+// Initialize the structs with function pointers
+struct Undergraduate UG = {
+    .BBA = BBA,
+    .LLB = LLB,
+    .EEE = EEE,
+    .Textile = Textile,
+    .CSE = CSE,
+    .Civil = Civil,
+    .ME = ME,
+    .ECE = ECE,
+    .B_Pharm = B_Pharm,
+    .ELL = ELL,
+    .Bangla = Bangla
+};
+
+struct UndergraduateDiploma UGD = {
+    .EEE = D_EEE,
+    .Textile = D_Textile,
+    .CSE = D_CSE,
+    .ECE = D_ECE,
+    .Civil = D_Civil,
+    .ME = D_ME
+};
