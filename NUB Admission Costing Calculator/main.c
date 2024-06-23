@@ -5,19 +5,29 @@ void on_submit_button_clicked(GtkWidget *widget, gpointer data);
 void D_on_submit_button_clicked(GtkWidget *widget, gpointer data);
 void display_result(const char *message);
 
+
+
 // Function declarations for callbacks
 void show_undergraduate(GtkWidget *widget, gpointer data);
 void show_diploma(GtkWidget *widget, gpointer data);
 
+
+
 // Function to create and show undergraduate and diploma interface
 void create_undergraduate_interface(GtkWidget *container);
 void create_diploma_interface(GtkWidget *container);
+
+
 
 // Global variables
 GtkWidget *content_area;
 GtkWidget *ssc_entry, *hsc_entry, *department_combo, *result_view;
 GtkTextBuffer *result_buffer;
 GtkWidget *diploma_entry;
+
+
+
+
 
 int main(int argc, char **argv) 
 {
@@ -83,6 +93,10 @@ int main(int argc, char **argv)
     return 0;
 }
 
+
+
+
+
 // Callback to show the undergraduate interface based on selection
 void show_undergraduate(GtkWidget *widget, gpointer data) 
 {
@@ -91,6 +105,10 @@ void show_undergraduate(GtkWidget *widget, gpointer data)
     gtk_widget_show_all(content_area); // Refresh the container
 }
 
+
+
+
+
 // Callback to show the diploma interface based on selection
 void show_diploma(GtkWidget *widget, gpointer data) 
 {
@@ -98,6 +116,10 @@ void show_diploma(GtkWidget *widget, gpointer data)
     create_diploma_interface(content_area);
     gtk_widget_show_all(content_area); // Refresh the container
 }
+
+
+
+
 
 // Function to create and show undergraduate interface
 void create_undergraduate_interface(GtkWidget *container) 
@@ -145,6 +167,10 @@ void create_undergraduate_interface(GtkWidget *container)
     
 }
 
+
+
+
+
 // Callback for the submit button
 void on_submit_button_clicked(GtkWidget *widget, gpointer data) 
 {
@@ -165,58 +191,63 @@ void on_submit_button_clicked(GtkWidget *widget, gpointer data)
         return;
     }
 
-    float ssc = atof(ssc_text);
-    float hsc = atof(hsc_text);
+    double ssc = atof(ssc_text);
+    double hsc = atof(hsc_text);
 
     // Clear the text view
     gtk_text_buffer_set_text(result_buffer, "", -1);
 
     if (strcmp(selected_department, "BBA") == 0) 
     {
-        UG.BBA(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "LLB") == 0) 
     {
-        UG.LLB(display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "EEE") == 0) 
     {
-        UG.EEE(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "Textile") == 0) 
     {
-        UG.Textile(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "CSE") == 0) 
     {
-        UG.CSE(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "Civil") == 0) 
     {
-        UG.Civil(ssc, hsc, display_result);
-    } else if (strcmp(selected_department, "ME") == 0) 
+        getCalculated(selected_department, ssc, hsc, display_result);
+    } 
+    else if (strcmp(selected_department, "ME") == 0) 
     {
-        UG.ME(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "ECE") == 0) 
     {
-        UG.ECE(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "B_Pharm") == 0) 
     {
-        UG.B_Pharm(display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "ELL") == 0) 
     {
-        UG.ELL(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     } 
     else if (strcmp(selected_department, "Bangla") == 0) 
     {
-        UG.Bangla(ssc, hsc, display_result);
+        getCalculated(selected_department, ssc, hsc, display_result);
     }
 
     g_free((gpointer)selected_department);
 }
+
+
+
+
 
 // Function to create and show diploma interface
 void create_diploma_interface(GtkWidget *container) 
@@ -238,8 +269,6 @@ void create_diploma_interface(GtkWidget *container)
     gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(department_combo), NULL, "Textile");
     gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(department_combo), NULL, "CSE");
     gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(department_combo), NULL, "ECE");
-    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(department_combo), NULL, "Civil");
-    gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(department_combo), NULL, "ME");
     gtk_grid_attach(GTK_GRID(grid), department_combo, 1, 1, 1, 1);
 
     submit_button = gtk_button_new_with_label("Submit");
@@ -253,6 +282,10 @@ void create_diploma_interface(GtkWidget *container)
     gtk_grid_attach(GTK_GRID(grid), result_view, 0, 4, 2, 1);
 
 }
+
+
+
+
 
 // Callback for the submit button in diploma interface
 void D_on_submit_button_clicked(GtkWidget *widget, gpointer data) 
@@ -273,38 +306,34 @@ void D_on_submit_button_clicked(GtkWidget *widget, gpointer data)
         return;
     }
 
-    float diploma = atof(diploma_text);
+    double diploma = atof(diploma_text);
 
     // Clear the text view
     gtk_text_buffer_set_text(result_buffer, "", -1);
 
     if (strcmp(selected_department, "EEE") == 0) 
     {
-        UGD.EEE(diploma, display_result);
+        D_getCalculated(selected_department, diploma, display_result);
     } 
     else if (strcmp(selected_department, "Textile") == 0) 
     {
-        UGD.Textile(diploma, display_result);
+        D_getCalculated(selected_department, diploma, display_result);
     } 
     else if (strcmp(selected_department, "CSE") == 0) 
     {
-        UGD.CSE(diploma, display_result);
+        D_getCalculated(selected_department, diploma, display_result);
     } 
     else if (strcmp(selected_department, "ECE") == 0) 
     {
-        UGD.ECE(diploma, display_result);
-    } 
-    else if (strcmp(selected_department, "Civil") == 0) 
-    {
-        UGD.Civil(diploma, display_result);
-    } 
-    else if (strcmp(selected_department, "ME") == 0) 
-    {
-        UGD.ME(diploma, display_result);
+        D_getCalculated(selected_department, diploma, display_result);
     }
 
     g_free((gpointer)selected_department);
 }
+
+
+
+
 
 // Function to display results
 void display_result(const char *message) 

@@ -8,43 +8,23 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 #include <stdbool.h>
+#include "database/sqlite3.h"
 
-// Utility fuctions
-// The function prototype for the display callback
+// The function pointer type prototype for the display callback
 typedef void (*ResultCallback)(const char *);
-void getwaiver(float SSC, float HSC);
-bool D_getwaiver(float DiplomaResult);
+
+// getwaiver functions
+void getwaiver(double SSC, double HSC);
+bool D_getwaiver(double DiplomaResult);
+
 void replace_placeholder(char *buffer, const char *placeholder, const char *value);
+
+// Disply functions
 void Display(ResultCallback callback);
 void D_Display(ResultCallback callback);
 
-struct Undergraduate 
-{
-    void (*BBA)(float SSC, float HSC, ResultCallback callback);
-    void (*LLB)(ResultCallback callback);
-    void (*EEE)(float SSC, float HSC, ResultCallback callback);
-    void (*Textile)(float SSC, float HSC, ResultCallback callback);
-    void (*CSE)(float SSC, float HSC, ResultCallback callback);
-    void (*Civil)(float SSC, float HSC, ResultCallback callback);
-    void (*ME)(float SSC, float HSC, ResultCallback callback);
-    void (*ECE)(float SSC, float HSC, ResultCallback callback);
-    void (*B_Pharm)(ResultCallback callback);
-    void (*ELL)(float SSC, float HSC, ResultCallback callback);
-    void (*Bangla)(float SSC, float HSC, ResultCallback callback);
-};
-
-struct UndergraduateDiploma 
-{
-    void (*EEE)(float DiplomaResult, ResultCallback callback);
-    void (*Textile)(float DiplomaResult, ResultCallback callback);
-    void (*CSE)(float DiplomaResult, ResultCallback callback);
-    void (*ECE)(float DiplomaResult, ResultCallback callback);
-    void (*Civil)(float DiplomaResult, ResultCallback callback);
-    void (*ME)(float DiplomaResult, ResultCallback callback);
-};
-
-// Declare the global struct for Undergraduate and UndergraduateDiploma
-extern struct Undergraduate UG;
-extern struct UndergraduateDiploma UGD;
+// Opens database and reads data and calculates
+void getCalculated(const char *department, double SSC, double HSC, ResultCallback callback);
+void D_getCalculated(const char *department, double DiplomaResult, ResultCallback callback);
 
 #endif
