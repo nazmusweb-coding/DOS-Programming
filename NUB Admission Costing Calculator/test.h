@@ -14,7 +14,7 @@
 typedef void (*ResultCallback)(const char *);
 
 // getwaiver functions
-void getwaiver(double SSC, double HSC);
+void getwaiver(double SSC, double HSC, char *department);
 bool D_getwaiver(double DiplomaResult);
 
 void replace_placeholder(char *buffer, const char *placeholder, const char *value);

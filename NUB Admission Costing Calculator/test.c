@@ -11,8 +11,9 @@ double semesterFee, creditFee, admissionFee, otherFees;
 
 
 
-// Readfile buffer size and temporary text file name for output generation
+// Readfile buffer size, format text file and temporary text file name for output generation
 #define BUFFER_SIZE 1024
+char FILE_NAME[] = "formats/format.txt";
 char TEMP_FILE_NAME[] = "formats/temp.txt";
 
 
@@ -28,10 +29,20 @@ char D_DATABASE_NAME[] = "database/d_costing_chart.db";
 
 
 // getwaiver function to calculate waiver based on SSC and HSC result for Undergraduate
-void getwaiver(double SSC, double HSC) 
+void getwaiver(double SSC, double HSC, char *department) 
 {
     // Waiver is given on lowest result.
     double Result = fmin(SSC, HSC);
+
+    // Initially sets waiver to zero for LLB, Pharmacy department, and lowest result under 3.50
+    if (strcmp(department, "LLB") == 0 || 
+        strcmp(department, "B_Pharm") == 0 ||
+        Result < 3.50)
+    {
+        waiver = 0;
+        return;
+    }
+    
     if (Result > 5.00) 
     {
         waiver = 70.0;
@@ -55,10 +66,6 @@ void getwaiver(double SSC, double HSC)
     else if (Result >= 3.50)
     {
         waiver = 10.0;
-    } 
-    else 
-    {
-        waiver = 0.0;
     }
 }
 
@@ -102,7 +109,7 @@ void replace_placeholder(char *buffer, const char *placeholder, const char *valu
 // Display function to read output format from csv file and print output to user
 void Display(ResultCallback callback) 
 {
-    FILE *fp = fopen("formats/format.txt", "r");
+    FILE *fp = fopen(FILE_NAME, "r");
     if (fp == NULL) 
     {
         perror("Failed to open input file");
@@ -161,7 +168,7 @@ void Display(ResultCallback callback)
 // Display function for Diploma Holders
 void D_Display(ResultCallback callback) 
 {
-    FILE *fp = fopen("formats/D_format.txt", "r");
+    FILE *fp = fopen(FILE_NAME, "r");
     if (fp == NULL) 
     {
         perror("Failed to open input file");
@@ -263,8 +270,7 @@ void getCalculated(const char *department, double SSC, double HSC, ResultCallbac
     credit = sqlite3_column_int(stmt, 4);
     year = sqlite3_column_int(stmt, 5);
     semester = sqlite3_column_int(stmt, 6);
-
-    getwaiver(SSC, HSC);
+    getwaiver(SSC, HSC, department);
     const int waivercreditFee = creditFee * ((100.0 - waiver)/100.0);
     TC = (credit * waivercreditFee) + (semesterFee * semester) + admissionFee + otherFees;
     Display(callback); // Pass the callback function as callback
