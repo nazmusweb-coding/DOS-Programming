@@ -14,6 +14,7 @@ double semesterFee, creditFee, admissionFee, otherFees;
 // Readfile buffer size, format text file and temporary text file name for output generation
 #define BUFFER_SIZE 1024
 char FILE_NAME[] = "formats/format.txt";
+char D_FILE_NAME[] = "formats/D_format.txt";
 char TEMP_FILE_NAME[] = "formats/temp.txt";
 
 
@@ -29,7 +30,7 @@ char D_DATABASE_NAME[] = "database/d_costing_chart.db";
 
 
 // getwaiver function to calculate waiver based on SSC and HSC result for Undergraduate
-void getwaiver(double SSC, double HSC, char *department) 
+void getwaiver(double SSC, double HSC, const char *department) 
 {
     // Waiver is given on lowest result.
     double Result = fmin(SSC, HSC);
@@ -168,7 +169,7 @@ void Display(ResultCallback callback)
 // Display function for Diploma Holders
 void D_Display(ResultCallback callback) 
 {
-    FILE *fp = fopen(FILE_NAME, "r");
+    FILE *fp = fopen(D_FILE_NAME, "r");
     if (fp == NULL) 
     {
         perror("Failed to open input file");
