@@ -11,7 +11,7 @@ double semesterFee, creditFee, admissionFee, otherFees;
 
 
 
-// Readfile buffer size, format text file and temporary text file name for output generation
+// Readfile buffer size, format text files and temporary text file name for output generation
 #define BUFFER_SIZE 1024
 char FILE_NAME[] = "formats/format.txt";
 char D_FILE_NAME[] = "formats/D_format.txt";
@@ -20,7 +20,7 @@ char TEMP_FILE_NAME[] = "formats/temp.txt";
 
 
 
-// Database row buffer size and file path
+// Database row buffer size and file paths
 #define ROW_BUFFFER_SIZE 256
 char DATABASE_NAME[] = "database/costing_chart.db";
 char D_DATABASE_NAME[] = "database/d_costing_chart.db";

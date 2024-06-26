@@ -11,9 +11,17 @@ typedef void (*ResultCallback)(const char *)
 NOTE: This type definition allows for greater flexibility and modularity in the code by enabling functions 
       to accept different callback implementations that conform to the specified signature.
 
-void getwaiver(float SSC, float HSC)
-- Determines the waiver percentage based on the lower of two results between SSC and HSC.
-- Result higher than than 5.0 is kept for GOLDEN GPA 5.
+void getwaiver(double SSC, double HSC, const char *department)
+- Determines the lower of the SSC and HSC results.
+- Checks if the department is "LLB" or "B_Pharm" or if the lowest result is below 3.50:
+  - Sets waiver to 0 if any of these conditions are met.
+- Sets waiver based on the lower of the SSC and HSC results:
+  - If the result is greater than 5.00, sets waiver to 70 (which is for GOLDEN GPA 5)
+  - If the result is equal to 5.00, sets waiver to 40
+  - If the result is between 4.80 and 4.99 (inclusive), sets waiver to 30
+  - If the result is between 4.50 and 4.79 (inclusive), sets waiver to 20
+  - If the result is between 4.00 and 4.49 (inclusive), sets waiver to 15
+  - If the result is between 3.50 and 3.99 (inclusive), sets waiver to 10
 
 NOTE: The function calculates waivers based on academic performance, 
       incentivizing higher scores with greater financial discounts.
@@ -63,17 +71,81 @@ NOTE: This function is similar to `Display` but uses a different format file ("f
       It ensures safe data processing and storage before passing it to the callback, avoiding data 
       corruption or loss during processing.
 
+void getCalculated(const char *department, double SSC, double HSC, ResultCallback callback)
+- Opens a connection to the database defined by DATABASE_NAME.
+- Handles errors if the database cannot be opened.
+- Constructs a SQL query to retrieve cost data for the specified department from the CostingChart table.
+- Prepares the SQL statement for execution.
+- Handles errors if the SQL statement fails to execute.
+- Executes the SQL statement and checks if the department was found.
+- Retrieves data from the resulting row:
+  - SemesterFee
+  - CreditFee
+  - AdmissionFee
+  - OtherFees
+  - TotalCredits
+  - Duration
+  - Semesters
+- Calls the getwaiver function to calculate the waiver based on SSC and HSC scores and department.
+- Calculates the total cost (TC) using the retrieved data and calculated waiver.
+- Calls the Display function with the provided callback function to display the results.
+- Resets all variables to 0.
+- Finalizes the SQL statement and closes the database connection.
+
+void D_getCalculated(const char *department, double DiplomaResult, ResultCallback callback)
+- Opens a connection to the database defined by D_DATABASE_NAME.
+- Handles errors if the database cannot be opened.
+- Constructs a SQL query to retrieve cost data for the specified department from the D_CostingChart table.
+- Prepares the SQL statement for execution.
+- Handles errors if the SQL statement fails to execute.
+- Executes the SQL statement and checks if the department was found.
+- Retrieves data from the resulting row:
+  - CreditFee
+  - SemesterFee
+  - OtherFees
+  - AdmissionFee
+  - Duration
+- Calls the D_getwaiver function to determine waiver eligibility based on the DiplomaResult:
+  - If eligible, retrieves:
+    - TotalCredit
+    - Semester
+  - If not eligible, retrieves:
+    - TotalCreditBelow
+    - SemesterBelow
+- Calculates the total cost (TC) using the retrieved data.
+- Calls the D_Display function with the provided callback function to display the results.
+- Resets all variables to 0.
+- Finalizes the SQL statement and closes the database connection.
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------test.c------------------------------------------------------------
 
-int waiver, TC, year, semester, credit
+double waiver, int TC, year, semester, credit,
 - These global variables are used throughout the program to store and manipulate data related to academic programs.
+
+double semesterFee, creditFee, admissionFee, otherFees
+- These global variables are used to read data from database.
 
 #define BUFFER_SIZE 1024
 - Defines a global macro for the buffer size used when reading from files. It sets the size of the buffer to 1024 bytes.
 
-char TEMP_FILE_NAME[] = "formats/temp.txt";
-- Declares a global array of characters that stores the name of the temporary file used during output generation.
+char FILE_NAME[] = "formats/D_formate.txt"
+- Declares a global array of characters that stores the path of the output format for undergraduate.
+
+char D_FILE_NAME[] = "formats/D_formate.txt"
+- Declares a global array of characters that stores the path of the output format for diploma holders.
+
+char TEMP_FILE_NAME[] = "formats/temp.txt"
+- Declares a global array of characters that stores the path of the temporary file used during output generation.
+
+#define ROW_BUFFFER_SIZE 256
+- Defines a global macro for the buffer size used when retrieving data from a row of database.
+
+char DATABASE_NAME[] = "database/costing_chart.db"
+- Declares a global array of characters that stores the path of the database for undergraduate.
+
+char D_DATABASE_NAME[] = "database/d_costing_chart.db"
+- Declares a global array of characters that stores the path of the database for diploma holders.
 
 ------------------------------------------------------------------------------------------------------------------------------
