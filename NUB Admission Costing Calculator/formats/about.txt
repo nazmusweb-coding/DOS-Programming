@@ -1,0 +1,34 @@
+
+                  NUB Admission Costing Calculator
+
+                                           Version 1.0
+
+                                        Developed by 
+
+                                  Mahmud Elahi Alif
+                     (Data organizer, Idea generater)
+                                   Department of CSE 
+                     Northern University Bangladesh
+               Email: Mahmud.elahi111@gmail.com
+
+                                        Nazmus Sakib 
+                             (Designer, Programmer)
+                                   Department of CSE 
+                     Northern University Bangladesh
+             Email: nazmusweb.official@gmail.com
+
+                    Md. Tanbir Hasan (Advisor, Help)
+                                   Department of CSE 
+                     Northern University Bangladesh
+     Email: mdkamrulhasantanbir0001@gmail.com
+
+                                Jubyer Bin Nasir (Help)
+                                   Department of CSE 
+                     Northern University Bangladesh
+                    Email: jubyerbinnasir@gmail.com
+
+         It is designed to help admission candidates 
+       stay informed about the total admission cost 
+        at Northern University Bangladesh. This tool 
+    provides a clear and concise breakdown of costs 
+associated with different undergraduate programs.
