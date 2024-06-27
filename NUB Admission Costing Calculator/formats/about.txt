@@ -6,7 +6,7 @@
                                         Developed by 
 
                                   Mahmud Elahi Alif
-                     (Data organizer, Idea generater)
+                     (Data organizer, Idea generator)
                                    Department of CSE 
                      Northern University Bangladesh
                Email: Mahmud.elahi111@gmail.com
