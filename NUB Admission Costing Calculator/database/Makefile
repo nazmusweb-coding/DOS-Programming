@@ -2,24 +2,21 @@
 
 CC = gcc
 CFLAGS = -Wall
-LIBS = libsqlite3.a
+LIBS = ./libsqlite3.a
 
 # Targets
-TARGET1 = sql
-TARGET2 = D_sql
+TARGETS = sql D_sql
 
-# Source files
-SRC1 = sql.c
-SRC2 = D_sql.c
+# Compile both programs
+all: $(TARGETS)
 
-# Compile the first program
-$(TARGET1): $(SRC1)
-	$(CC) $(CFLAGS) -o $(TARGET1) $(SRC1) $(LIBS)
+# Compile each target
+sql: sql.c
+	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 
-# Compile the second program
-$(TARGET2): $(SRC2)
-	$(CC) $(CFLAGS) -o $(TARGET2) $(SRC2) $(LIBS)
+D_sql: D_sql.c
+	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
 
 # Clean target to remove binaries
 clean:
-	rm -f $(TARGET1) $(TARGET2)
+	rm -f $(TARGETS)
