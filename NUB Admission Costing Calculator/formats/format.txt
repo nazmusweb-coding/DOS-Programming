@@ -7,10 +7,21 @@ You got "waiver"% waiver based on your SSC and HSC result.
 
 Total cost is "TC" TK(Full fee)
 (no hidden charge applied)
+ ______________________________________
+ Basic info
+            Program Duration           : "year" years
+            Number of Semesters  : "semester"
+            Total Credit                         : "credit"
 
-Duration: "year" years
-Semester: "semester"
-Total Credit: "credit"
-
+ Fees breakdown
+            Per Credit Fee    : "CF" TK
+            Semester Fee     : "SF" TK
+            Admission Fee   : "AF" TK
+            One Time Fee      : "OTF" TK
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 Your waiver will be maintained if you can score at least 3.00 cgpa in every semester.
 If you score less then 3.00 in a semester then you have to pay full for the next semester. 
+
+N.B. -
+    1. There are no waiver policies for the LLB and Pharmacy Departments.
+    2. Basic info for credit-transferring students is approximately calculated.

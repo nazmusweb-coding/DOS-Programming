@@ -25,6 +25,8 @@ The NUB Admission Costing Calculator includes the following features:
 - **Cost Breakdown**: Provides a detailed breakdown of total costs.
 - **Duration and Credit Hours**: Informs candidates about the total duration of the program, the number of semesters, and total credit hours.
 - **Special Provision for Diploma Holders**: Provides a separate interface for diploma holders to calculate their admission costs.
+- **Credit Transferring Option**: Provides an option for credit transfer, allowing candidates to input their transferred credits.
+- **About Section**: Includes information about the software, such as software name, version, developer's name, description, and project GitHub repo.
 
 ## Used Frameworks and GUI
 The project utilizes the following frameworks and GUI tools:
@@ -39,23 +41,32 @@ The project utilizes the following frameworks and GUI tools:
 ![Default Interface](photos/default_interface.png)
 
 
-### Menu Options
+### Available Options
 *This screenshot shows the options under the Menu bar.*
 
 ![Menu Options](photos/menu_options.png)
 
+*This screenshot shows the About option.*
+
+![About Options](photos/about_option.png)
 
 ### Undergraduate Option Interface
-*This screenshot shows the interface for the Undergraduate option.*
+*This screenshot shows the interface for the Undergraduate option. , accessible from Menu -> Undergraduate.*
 
 ![Undergraduate Option](photos/Undergraduate_option.png)
 
+*This screenshot shows the option in the Undergraduate interface for credit transferring admission candidates, , accessible from Menu -> Undergraduate -> Credit transferring here? -> Yes.*
+
+![Undergraduate Option for credit transfer](photos/Undergraduate_option(for_credit_transfer).png)
 
 ### Interface for Diploma Holders
-*This screenshot shows the interface for the diploma holders option.*
+*This screenshot shows the interface for the diploma holders option, , accessible from Menu -> Undergraduate (for Diploma Holders).*
 
 ![Undergraduate (for Diploma Holders) Option](photos/Undergraduate(for_DH)_option.png)
 
+*This screenshot shows the option in the diploma holders interface for credit transferring admission candidates, accessible from Menu -> Undergraduate (for Diploma Holders) -> Credit transferring here? -> Yes.*
+
+![Undergraduate Option for credit transfer](photos/Undergraduate(for_DH)_option(for_credit_transfer).png)
 
 ## User Manual
 ### Installation

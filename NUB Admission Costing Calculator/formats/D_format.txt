@@ -3,14 +3,25 @@ Congratulations!!
 
 Dear admission candidate,
 
-Based on your Dipoloma result.
+Based on your Diploma result.
 
 Total cost is "TC" TK(Full fee)
 (no hidden charge applied)
+ ______________________________________
+ Basic info
+            Program Duration           : ± "year" years
+            Number of Semesters  : ± "semester"
+            Total Credit                         : "credit"
 
-Duration: "year" years
-Semester: "semester"
-Total Credit: "credit"
-
+ Fees breakdown
+            Per Credit Fee    : "CF" TK
+            Semester Fee     : "SF" TK
+            Admission Fee   : "AF" TK
+            One Time Fee      : "OTF" TK
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 Your waiver will be maintained if you can score at least 3.00 cgpa in every semester.
 If you score less then 3.00 in a semester then you have to pay full for the next semester.
+
+N.B. -
+    1. Students with a diploma CGPA of 3.00 or higher will be offered main courses only.
+    2. We perform approximately calculations for credit-transferring students.
