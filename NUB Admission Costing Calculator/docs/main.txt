@@ -4,27 +4,33 @@ You should know:
 - D_ prefix is used for Diploma Holder functions.
 
 void on_submit_button_clicked(GtkWidget *widget, gpointer data)
-- Handles the 'submit' button click event in a GTK application.
-- Retrieves text from SSC and HSC entry widgets and the selected department from a combo box.
-- Checks if any of the required fields are empty and displays a message if so.
-- Converts the retrieved text to float values for SSC and HSC results.
-- Initializes an Undergraduate struct with pointers to department-specific functions.
-- Calls the appropriate function based on the selected department, 
-  passing SSC and HSC results along with a callback function to display results.
-- Frees memory allocated by GTK for the selected department string.
+- Handles the submission of user input for undergraduate program admission calculations.
+- Parameters:
+  - GtkWidget *widget: The widget that triggered this callback.
+  - gpointer data: Additional data passed to the callback (unused in this function).
+- Steps:
+  - Retrieves the text entered in the SSC, HSC, and credit entry fields, as well as the selected department.
+  - Checks if any required fields are empty. If so, displays an error message and clears the result view.
+  - Converts the SSC and HSC text to double values.
+  - Clears the result view.
+  - Calls `getCalculated` function for the selected department, passing the SSC, HSC, `get_credit` callback, and `display_result` callback to perform the calculation and display the result.
+  - Frees the memory allocated for the selected department string.
 
 NOTE: This function is crucial for processing user input and ensuring that all required 
       fields are filled before proceeding with department-specific calculations or actions.
 
 void D_on_submit_button_clicked(GtkWidget *widget, gpointer data)
-- Serves as a callback for the 'submit' button in the diploma interface of a GTK application.
-- Retrieves text from the diploma entry widget and the selected department from a combo box.
-- Checks if any of the required fields are empty and displays a message if so.
-- Converts the retrieved text to a float value for the diploma result.
-- Initializes an `UndergraduateDiploma` struct with pointers to department-specific functions for diploma holders.
-- Calls the appropriate function based on the selected department, 
-   passing the diploma result along with a callback function to display results.
-- Frees memory allocated by GTK for the selected department string.
+- Handles the submission of user input for diploma program admission calculations.
+- Parameters:
+  - GtkWidget *widget: The widget that triggered this callback.
+  - gpointer data: Additional data passed to the callback (unused in this function).
+- Steps:
+  - Retrieves the text entered in the diploma entry, credit entry fields and the selected department.
+  - Checks if any required fields are empty. If so, displays an error message and clears the result view.
+  - Converts the diploma text to a double value.
+  - Clears the result view.
+  - Calls `D_getCalculated` function for the selected department, passing the diploma result, `D_get_credit` callback, and `display_result` callback to perform the calculation and display the result.
+  - Frees the memory allocated for the selected department string.
 
 NOTE: This function is essential for processing diploma holder input and ensuring that all required 
       fields are filled before proceeding with department-specific calculations or actions.
@@ -38,42 +44,117 @@ void display_result(const char *message)
 NOTE: The `display_result` function is a utility function used throughout the GTK application to output 
       messages to both the user interface and the console, aiding in both user interaction and debugging.
 
+int get_credit(sqlite3_stmt *stmt)
+- Checks if the credit transfer option is active using the `credit_transfer_check_yes` toggle button.
+- Retrieves the total number of credits, the number of semesters, and the duration in years from the database statement.
+- If the credit transfer option is active
+  - Calculates the minimum and maximum credits based on the total credits and number of semesters.
+  - Retrieves the number of credits entered by the user from the `credit_entry` widget.
+  - Checks if the entered credits are within the valid range (between minimum and maximum credits).
+  - If the entered credits are less than the minimum required credits, displays an error message using `display_result`.
+  - If the entered credits are more than the maximum allowed credits, displays an error message.
+  - Calculates the approximate number of semesters and years based on the entered credits.
+- Returns 0 on success, or -1 if there are any errors or invalid input.
+
+int D_get_credit(sqlite3_stmt *stmt, double DiplomaResult)
+- Checks if the credit transfer option is active using the `credit_transfer_check_yes` toggle button.
+- Retrieves the total number of credits, the number of semesters, and the duration in years from the database statement.
+- If the credit transfer option is active
+  - Calculates the minimum and maximum credits based on the total credits and number of semesters.
+  - Retrieves the number of credits entered by the user from the `credit_entry` widget.
+  - Checks if the entered credits are within the valid range (between minimum and maximum credits).
+  - If the entered credits are less than the minimum required credits, displays an error message using `display_result`.
+  - If the entered credits are more than the maximum allowed credits, displays an error message.
+  - Calculates the approximate number of semesters and years based on the entered credits.
+- Calls the `D_getwaiver` function to determine waiver eligibility based on the `DiplomaResult`.
+  - If eligible, retrieves the total credits and number of semesters for waiver.
+  - If not eligible, retrieves the total credits and number of semesters without waiver.
+- Returns 0 on success, or -1 if there are any errors or invalid input.
+
+void on_credit_transfer_no_toggled(GtkToggleButton *togglebutton, gpointer data)
+- This function is called when the "No" option for credit transfer is toggled.
+- It sets the credit transfer option to "No" by deactivating the credit entry widget.
+- Ensures that the related interface elements for credit transfer are disabled.
+
+void on_credit_transfer_yes_toggled(GtkToggleButton *togglebutton, gpointer data)
+- This function is called when the "Yes" option for credit transfer is toggled.
+- It sets the credit transfer option to "Yes" by activating the credit entry widget.
+- Ensures that the related interface elements for credit transfer are enabled.
+
 void show_undergraduate(GtkWidget *widget, gpointer data)
-- This callback function is triggered to show the undergraduate interface.
-- It first clears any previous content in the container using `gtk_container_foreach` and `gtk_widget_destroy`.
-- Then, it calls `create_undergraduate_interface` to build the undergraduate interface inside the content area.
-- Finally, it refreshes the container to display the new interface with `gtk_widget_show_all`.
+- Clears the existing content in the container and displays the undergraduate interface.
+- Parameters:
+  - GtkWidget *widget: The widget that triggered this callback.
+  - gpointer data: Additional data passed to the callback (unused in this function).
+- Steps:
+  - Calls `gtk_container_foreach` to iterate over all children of `content_area` and destroy them, clearing the previous content.
+  - Calls `create_undergraduate_interface` to create and set up the undergraduate interface within `content_area`.
+  - Calls `gtk_widget_show_all` to refresh the `content_area` and display the new contents.
+  - Sets the `credit_entry` widget to be invisible initially, as the "No" option for credit transfer is toggled by default.
 
 void show_diploma(GtkWidget *widget, gpointer data)
-- Similar to `show_undergraduate`, this callback function is used to show the diploma interface.
-- It clears any existing content in the container.
-- Calls `create_diploma_interface` to construct the diploma interface within the content area.
-- Refreshes the container to update the display with the new interface.
+- Clears the existing content in the container and displays the diploma interface.
+- Parameters:
+  - GtkWidget *widget: The widget that triggered this callback.
+  - gpointer data: Additional data passed to the callback (unused in this function).
+- Steps:
+  - Calls `gtk_container_foreach` to iterate over all children of `content_area` and destroy them, clearing the previous content.
+  - Calls `create_diploma_interface` to create and set up the diploma interface within `content_area`.
+  - Calls `gtk_widget_show_all` to refresh the `content_area` and display the new contents.
+  - Sets the `credit_entry` widget to be invisible initially, as the "No" option for credit transfer is toggled by default.
 
 NOTE: Both functions are essential for switching between different user interfaces within the application, 
       ensuring a smooth transition and clear display of the relevant interface based on user selection.
 
 void create_undergraduate_interface(GtkWidget *container)
-- This function constructs the undergraduate interface within a given container widget.
-- It creates a new grid widget to organize interface elements.
-- Adds labels and entry widgets for SSC and HSC results, allowing users to input their scores.
-- Sets up a combo box for department selection with various options like BBA, LLB, EEE, etc.
-- Includes a 'Submit' button that triggers the `on_submit_button_clicked` callback when clicked.
-- Initializes a text view and its associated buffer for displaying results, making it non-editable and hiding the cursor.
+- Creates and sets up the user interface for the undergraduate program section.
+- Parameters:
+  - GtkWidget *container: The GTK container widget where the undergraduate interface will be added.
+- Steps:
+  - Initializes the GTK grid and packs it into the provided container.
+  - Creates and configures the widgets for SSC result, HSC result, department selection, credit transfer options, and submission button.
+  - Adds labels, entries, combo boxes, and buttons to the grid.
+  - Connects the signals and callbacks to handle user interactions for credit transfer options and the submit button.
+  - Adds a text view for displaying results and sets its properties to be non-editable and non-visible cursor.
+  - Packs and attaches the widgets to the provided container using the grid layout.
 
 NOTE: The `create_undergraduate_interface` function is crucial for setting up the user interface where undergraduate applicants 
       can enter their results and select their desired department for further processing or evaluation in the application.
 
 void create_diploma_interface(GtkWidget *container)
-- This function is designed to construct the diploma interface within a specified container widget.
-- It creates a grid layout to organize interface elements systematically.
-- Adds a label and an entry widget for the diploma result, allowing diploma holders to input their score.
-- Sets up a combo box for department selection with options like EEE, Textile, CSE, etc.
-- Includes a 'Submit' button that connects to the `D_on_submit_button_clicked` callback for processing the input when clicked.
-- Initializes a text view and its associated buffer for result display, configured to be non-editable and with an invisible cursor.
+- Creates and sets up the user interface for the diploma holders section.
+- Parameters:
+  - GtkWidget *container: The GTK container widget where the diploma interface will be added.
+- Steps:
+  - Initializes the GTK grid and packs it into the provided container.
+  - Creates and configures the widgets for Diploma result, department selection, credit transfer options, and submission button.
+  - Adds labels, entries, combo boxes, and buttons to the grid.
+  - Connects the signals and callbacks to handle user interactions for credit transfer options and the submit button.
+  - Adds a text view for displaying results and sets its properties to be non-editable and non-visible cursor.
+  - Packs and attaches the widgets to the provided container using the grid layout.
 
 NOTE: The `create_diploma_interface` function plays a key role in providing a user interface for diploma holders to 
       enter their results and choose their department for subsequent actions or calculations in the application.
+
+void on_about_activate(GtkWidget *widget)
+- Activates and displays the "About" dialog.
+- Calls the read_about_description() function to read the description from the file.
+- Creates a new GTK dialog with the title "About".
+- Creates a vertical box (vbox) to hold the contents of the dialog.
+- Creates a label widget for the description and sets its text to about_description.
+- Packs the label into the vertical box.
+- Creates a horizontal box (hbox) to hold additional text and the "Give a Star" button.
+- Creates a label widget for additional text "Help us by giving a star to the GitHub repo" and packs it into the horizontal box.
+- Creates a button labeled "Give a Star", connects its "clicked" signal to the on_give_star_clicked function, and packs it into the horizontal box.
+- Packs the horizontal box into the vertical box.
+- Adds the vertical box to the content area of the dialog.
+- Displays all widgets in the dialog.
+- Connects the "response" signal of the dialog to the gtk_widget_destroy function to handle dialog closure.
+
+void on_give_star_clicked()
+- Handles the action when the "Give a Star" button is clicked in the "About" dialog.
+- Defines the GitHub repository URL as "https://github.com/nazmusweb-coding/DOS-Programming".
+- Uses gtk_show_uri_on_window() to open the GitHub repository URL in the default web browser.
 
 GtkWidget *content_area;
 - This global widget serves as the main container for the content in the application. 
@@ -95,19 +176,40 @@ GtkTextBuffer *result_buffer;
 GtkWidget *diploma_entry;
 - Similar to `ssc_entry` and `hsc_entry`, this global entry widget is used for inputting diploma results in the diploma interface.
 
+GtkWidget *credit_transfer_check_no;
+- Represents a global GTK check button widget used to indicate the absence of credit transfer option.
+- Initially set to active state (checked) by default.
+- Used in the user interface to allow selection of no credit transfer option.
+
+GtkWidget *credit_transfer_check_yes;
+- Represents a global GTK check button widget used to indicate the presence of credit transfer option.
+- Initially set to inactive state (unchecked) by default.
+- Used in the user interface to allow selection of credit transfer option.
+
+GtkWidget *credit_entry;
+- Represents a global GTK entry widget used for user input of the amount of credit to transfer.
+- Placeholder text suggests users to enter the amount of credit.
+- Used alongside the credit transfer check buttons to provide additional information when credit transfer option is selected.
+
 int main(int argc, char **argv)
-- This function is the entry point of the GTK application.
-- Initializes GTK with `gtk_init`.
-- Creates the main window with a title "NUB Admission Costing Calculator" and sets 
-  its properties like border width, default size, position, and resizability.
-- Sets up a grid layout as the main container for the window's content.
-- Constructs a menu bar with menu items "Undergraduate" and "Undergraduate (for Diploma Holders)" 
-  which are connected to their respective callback functions to display different interfaces.
-- Initializes the `content_area` as a vertical box to hold different interfaces and attaches it to the grid.
-- Calls `create_undergraduate_interface` to load the undergraduate interface by default.
-- Shows all widgets with `gtk_widget_show_all`.
-- Connects the window's destroy event to end the GTK main loop, allowing for clean exit of the application.
-- Enters GTK main loop with `gtk_main`.
+- Initializes GTK and creates the main window with a menu bar.
+- Parameters:
+  - int argc: The number of command-line arguments.
+  - char **argv: The array of command-line arguments.
+- Steps:
+  - Initializes the GTK library with the command-line arguments.
+  - Creates the main window with a title and default size.
+  - Sets the window position to center and makes the window non-resizable.
+  - Creates a grid layout and attaches it to the main window.
+  - Creates a menu bar with options for "Undergraduate", "Undergraduate (for Diploma Holders)", and "About".
+  - Connects the menu items to their respective callback functions: `show_undergraduate`, `show_diploma`, and `on_about_activate`.
+  - Attaches the menu bar to the grid.
+  - Creates a vertical box as the content area and attaches it to the grid.
+  - Displays the undergraduate interface by default.
+  - Shows all widgets and hides the credit entry field by default.
+  - Connects the main window's destroy event to the GTK main loop to ensure proper application termination.
+  - Enters the GTK main loop.
+  - Returns 0 upon successful completion.
 
 NOTE: The `main` function sets up the initial state of the application, including window properties, menu options, 
       and default interface. It also handles event connections for user interactions and application lifecycle.

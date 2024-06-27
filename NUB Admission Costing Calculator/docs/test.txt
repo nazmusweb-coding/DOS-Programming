@@ -11,6 +11,17 @@ typedef void (*ResultCallback)(const char *)
 NOTE: This type definition allows for greater flexibility and modularity in the code by enabling functions 
       to accept different callback implementations that conform to the specified signature.
 
+typedef int (*CreditCallback)(sqlite3_stmt *);
+- Defines a function pointer type named CreditCallback.
+- CreditCallback is a pointer to a function that takes a single argument of type `sqlite3_stmt *` and returns an integer.
+- It is used to pass functions as arguments to other functions, allowing for custom behavior when those functions are called.
+
+typedef int (*D_CreditCallback)(sqlite3_stmt *, double);
+- Defines a function pointer type named D_CreditCallback.
+- D_CreditCallback is a pointer to a function that takes two arguments: one of type `sqlite3_stmt *` and
+  one of type `double`, and returns an integer.
+- It is used to pass functions as arguments to other functions, allowing for custom behavior when those functions are called.
+
 void getwaiver(double SSC, double HSC, const char *department)
 - Determines the lower of the SSC and HSC results.
 - Checks if the department is "LLB" or "B_Pharm" or if the lowest result is below 3.50:
@@ -117,11 +128,22 @@ void D_getCalculated(const char *department, double DiplomaResult, ResultCallbac
 - Resets all variables to 0.
 - Finalizes the SQL statement and closes the database connection.
 
+void read_about_description()
+- Opens the file specified by ABOUT_DETAILS_PATH in read mode.
+- Handles errors if the file cannot be opened by printing an error message and 
+  setting about_description to "ERROR 404\nNot Found".
+- Initializes about_description as an empty string.
+- Reads lines from the file until the end
+  - Removes the newline character if present.
+  - Concatenates each line to the about_description string.
+  - Adds a newline character for formatting between lines.
+- Closes the file.
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------test.c------------------------------------------------------------
 
-double waiver, int TC, year, semester, credit,
+double waiver, int TC, year, semester, credit (to be used across multiple files)
 - These global variables are used throughout the program to store and manipulate data related to academic programs.
 
 double semesterFee, creditFee, admissionFee, otherFees
@@ -147,5 +169,14 @@ char DATABASE_NAME[] = "database/costing_chart.db"
 
 char D_DATABASE_NAME[] = "database/d_costing_chart.db"
 - Declares a global array of characters that stores the path of the database for diploma holders.
+
+#define MAX_BUF_SIZE 4096
+- Defines a global macro for the buffer size used when reading from files. It sets the size of the buffer to 4096 bytes.
+
+char about_description[MAX_BUF_SIZE] = {0};
+- This global array stores the content read from the about file.
+
+char ABOUT_DETAILS_PATH[] = "../formats/about.txt";
+- This global array stores the path to the about file.
 
 ------------------------------------------------------------------------------------------------------------------------------

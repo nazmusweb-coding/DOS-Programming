@@ -25,4 +25,8 @@ D_fromat.txt
 - A output format for Undergraduate(for Diploma Holders)
 - Similar purpose as format.txt file.
 
+about.txt
+- A output format for About section in menu bar.
+- Informative part of this software.
+
 ----------------------------------------------------------------------------------------------------------------------------------------------
