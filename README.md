@@ -20,15 +20,15 @@ The NUB Admission Costing Calculator helps admission candidates at Northern Univ
 
 **Deadlines for Mini Project:**
 
-- **Mini Project's Github Link Submission (Tentative):** 12 July (If Mid Week is over) Otherwise 19 July
-- **Mini Project's Showcase and Viva (Tentative):** 13 July (If Mid Week is over) Otherwise 20 July
-- **Mini Project Lab Report Submission:** 24 August
+- **Mini Project's Github Link Submission (Tentative):** 6 September, 11:59 PM
+- **Mini Project's Showcase and Viva (Tentative):** 7 September (Class Time)
+- **Mini Project Lab Report Submission:** 28 September (Class Time)
 
 ### Final Project: Scheduler
 
 The Scheduler helps to keep track of workflow and it also have a generatative feature to automate the schedule seperation from whole big routine of any department in Northern University Bangladesh.
 
 **Deadlines for Final Project:**
-- **Final Project's Github Link Submission (Tentative):** 23 August
-- **Final Project's Showcase and Viva (Tentative):** 24 August
-- **Final Project Lab Report Submission:** 24 August
+- **Final Project's Github Link Submission (Tentative):** 20 September - 27 September, 11:59 PM
+- **Final Project's Showcase and Viva (Tentative):** 21 September & 28 September (Class Time)
+- **Final Project Lab Report Submission:** 28 September (Class Time)
